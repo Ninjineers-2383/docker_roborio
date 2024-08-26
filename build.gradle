@@ -54,7 +54,11 @@ model {
                     sharedLibraryFile = file("/libs/${targetPlatform.name}/libzmq.so.5.2.5")
                 }
             }
-
+            libproto {
+                binaries.withType(StaticLibraryBinary) {
+                    staticLibraryFile = file("/libs/${targetPlatform.name}/libprotobuf.a")
+                }
+            }
         }
     }
     components {
@@ -74,6 +78,7 @@ model {
                     srcDir '/usr/local/include'
                 }
                 lib library: 'libzmq', linkage: 'shared'
+                lib library: 'libproto', linkage: 'static'
             }
 
             // Set deploy task to deploy this component
